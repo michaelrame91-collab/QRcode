@@ -49,7 +49,7 @@
         document.getElementById("qrcode").appendChild(canvas);
 
         // Réseau Wi-Fi ouvert
-        const wifiConfig = "WIFI:T:nopass;S:ETAMPES-WIFI-PUBLIC;;";
+        const wifiConfig = "WIFI:T:nopass;S:ETAMPES-WIFI-PUBLIC;";
 
         QRCode.toCanvas(canvas, wifiConfig, {
             width: 250
