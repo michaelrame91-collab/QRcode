@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code</title>
+    <title>QR Code Wi-Fi</title>
 
     <style>
         body {
@@ -21,7 +21,7 @@
 </head>
 <body>
 
-    <h2>Mon QR Code</h2>
+    <h2>Connexion ETAMPES-WIFI-PUBLIC</h2>
     <div id="qrcode"></div>
 
     <script type="module">
@@ -30,8 +30,11 @@
         const canvas = document.createElement("canvas");
         document.getElementById("qrcode").appendChild(canvas);
 
-        QRCode.toCanvas(canvas, "https://www.mairie-etampes.fr/", {
-            width: 200
+        // Réseau Wi-Fi ouvert (sans mot de passe)
+        const wifiConfig = "WIFI:T:nopass;S:ETAMPES-WIFI-PUBLIC;;";
+
+        QRCode.toCanvas(canvas, wifiConfig, {
+            width: 250
         }, function (error) {
             if (error) {
                 console.error(error);
