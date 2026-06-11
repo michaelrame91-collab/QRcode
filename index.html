@@ -13,33 +13,41 @@
         }
 
         #container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative;
+            display: inline-block;
         }
 
-        #logo {
-            width: 120px;
-            height: auto;
-        }
-
+        /* QR code en arrière-plan */
         #qrcode {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        #qrcode canvas {
+            display: block;
+        }
+
+        /* Blason au premier plan */
+        #logo {
+            position: relative;
+            z-index: 2;
+            display: block;
+            width: 100px;
+            height: auto;
         }
     </style>
 </head>
+
 <body>
 
-    <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Connexion ETAMPES-WIFI-PUBLIC</h1>
+    <h1 style="font-size: 62px;">ETAMPES-WIFI-PUBLIC</h1><br><br><br><br><br><br><br><br><br><br><br><br>
 
     <div id="container">
-        <!-- Image à gauche -->
-        <img style="height: 290px; width: 290px;" id="logo" src="etampes.png" alt="Logo">
-
-        <!-- QR code à droite -->
         <div id="qrcode"></div>
+        <img id="logo" src="etampes.png" alt="Blason d'Étampes">
     </div>
 
     <script type="module">
@@ -48,14 +56,21 @@
         const canvas = document.createElement("canvas");
         document.getElementById("qrcode").appendChild(canvas);
 
-        // Réseau Wi-Fi ouvert
-        const wifiConfig = "WIFI:T:nopass;S:ETAMPES-WIFI-PUBLIC;";
+        const wifiConfig = "WIFI:T:nopass;S:ETAMPES-WIFI-PUBLIC;;";
 
-        QRCode.toCanvas(canvas, wifiConfig, {
-            width: 250
-        }, function (error) {
-            if (error) console.error(error);
-        });
+        QRCode.toCanvas(
+            canvas,
+            wifiConfig,
+            {
+                width: 580,
+                margin: 1
+            },
+            function (error) {
+                if (error) {
+                    console.error(error);
+                }
+            }
+        );
     </script>
 
 </body>
