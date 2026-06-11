@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Code</title>
+</head>
+<style>
+#qrcode {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+h2{
+    text-align: center;
+}
+</style>
+<body>
+
+<h2>Mon QR Code</h2>
+<div id="qrcode"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+    new QRCode(document.getElementById("qrcode"), {
+        text: "https://www.mairie-etampes.fr/",
+        width: 200,
+        height: 200
+    });
+</script>
+
+</body>
+</html>
