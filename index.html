@@ -12,17 +12,37 @@
             margin-top: 50px;
         }
 
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        #logo {
+            width: 120px;
+            height: auto;
+        }
+
         #qrcode {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            align-items: center;
         }
     </style>
 </head>
 <body>
 
     <h2>Connexion ETAMPES-WIFI-PUBLIC</h2>
-    <div id="qrcode"></div>
+
+    <div id="container">
+        <!-- Image à gauche -->
+        <img style="height: 400px; width: 400px;" id="logo" src="etampes.png" alt="Logo">
+
+        <!-- QR code à droite -->
+        <div id="qrcode"></div>
+    </div>
 
     <script type="module">
         import QRCode from "https://cdn.jsdelivr.net/npm/qrcode@1.5.3/+esm";
@@ -30,15 +50,13 @@
         const canvas = document.createElement("canvas");
         document.getElementById("qrcode").appendChild(canvas);
 
-        // Réseau Wi-Fi ouvert (sans mot de passe)
+        // Réseau Wi-Fi ouvert
         const wifiConfig = "WIFI:T:nopass;S:ETAMPES-WIFI-PUBLIC;;";
 
         QRCode.toCanvas(canvas, wifiConfig, {
             width: 250
         }, function (error) {
-            if (error) {
-                console.error(error);
-            }
+            if (error) console.error(error);
         });
     </script>
 
