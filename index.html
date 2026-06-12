@@ -17,7 +17,7 @@
             display: inline-block;
         }
 
-        /* QR code en arrière-plan */
+        /* QR code centré derrière le logo */
         #qrcode {
             position: absolute;
             top: 50%;
@@ -30,7 +30,7 @@
             display: block;
         }
 
-        /* Blason au premier plan */
+        /* Logo affiché au-dessus du QR code */
         #logo {
             position: relative;
             z-index: 2;
@@ -43,34 +43,56 @@
 
 <body>
 
-    <h1 style="font-size: 62px;">ETAMPES-WIFI-PUBLIC</h1><br><br><br><br><br><br><br><br><br><br><br><br>
+    <h1 style="font-size: 62px;">ETAMPES-WIFI-PUBLIC</h1>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br>
 
     <div id="container">
+        <!-- Zone où sera généré le QR code -->
         <div id="qrcode"></div>
+
+        <!-- Logo placé au centre du QR code -->
         <img id="logo" src="etampes.png" alt="Blason d'Étampes">
     </div>
 
     <script type="module">
+
+        /* Import de la bibliothèque QRCode depuis jsDelivr */
         import QRCode from "https://cdn.jsdelivr.net/npm/qrcode@1.5.3/+esm";
 
+        /* Création dynamique d'un élément canvas */
         const canvas = document.createElement("canvas");
+
+        /* Ajout du canvas dans la zone prévue pour le QR code */
         document.getElementById("qrcode").appendChild(canvas);
 
+        /*
+         * Configuration Wi-Fi au format standard :
+         * T:nopass  -> réseau ouvert (sans mot de passe)
+         * S:...     -> SSID (nom du réseau)
+         * ;;        -> fin de la configuration
+         */
         const wifiConfig = "WIFI:T:nopass;S:ETAMPES-WIFI-PUBLIC;;";
 
+        /*
+         * Génération du QR code dans le canvas
+         */
         QRCode.toCanvas(
-            canvas,
-            wifiConfig,
+            canvas,      // support d'affichage
+            wifiConfig,  // contenu encodé dans le QR code
             {
-                width: 580,
-                margin: 1
+                width: 580, // taille du QR code en pixels
+                margin: 1   // marge minimale autour du code
             },
             function (error) {
+
+                /* Affichage d'une erreur éventuelle */
                 if (error) {
                     console.error(error);
                 }
             }
         );
+
     </script>
 
 </body>
